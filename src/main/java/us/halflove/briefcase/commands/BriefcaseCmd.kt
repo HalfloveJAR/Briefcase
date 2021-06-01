@@ -27,7 +27,10 @@ object BriefcaseCmd : CommandExecutor{
         }
 
         when (args[0]) {
-            "newcode" -> sender.sendMessage(CodeGenerator.generateCode().toString())
+            "newcode" -> {
+                CodeGenerator.generateCode()
+                sender.sendMessage("New code created, see console for details.")
+            }
             "modify" -> Hopper.openHopper(sender as Player)
             "help" -> CmdHelpFunction.helpCommand(sender)
             else -> {

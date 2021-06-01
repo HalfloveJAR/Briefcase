@@ -1,8 +1,11 @@
 package us.halflove.briefcase.gui
 
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
 import java.util.*
 
 /*
@@ -14,13 +17,15 @@ import java.util.*
 *
 */
 
-object EditingEvent : EventListener{
+class EditingEvent : Listener{
 
     @EventHandler
-    fun inventoryEditEvent(event: InventoryClickEvent){
-        var player: Player = event.whoClicked as Player
+    fun inventoryEditEvent(event: InventoryCloseEvent){
+        var player: Player = event.player as Player
         if(event.view.title == "Briefcase"){
-            if(event.slot !in 0..4) event.isCancelled = true
+
+            //Save when closed
+
         }
     }
 

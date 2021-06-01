@@ -22,7 +22,6 @@ object Hopper {
     }
 
     fun editHopper(player: Player){
-        Editor.allowEditing[player] = true
         var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
         player.openInventory(gui)
     }
