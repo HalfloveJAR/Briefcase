@@ -4,6 +4,9 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
+import us.halflove.briefcase.storage.BriefcaseStorage
+
 
 /*
 *
@@ -16,6 +19,7 @@ import org.bukkit.inventory.Inventory
 
 object Hopper {
 
+    //Opens hopper GUI
     fun openHopper(player: Player) {
         var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
         player.openInventory(gui)

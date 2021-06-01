@@ -22,6 +22,7 @@ object BriefcaseStorage {
     lateinit var data: FileConfiguration
     lateinit var dataFile: File
 
+    //Creates a data.yml if one doesn't exist
     fun createDataFile(plugin: Plugin){
 
         if(!plugin.dataFolder.exists()) plugin.dataFolder.mkdir()
@@ -37,6 +38,7 @@ object BriefcaseStorage {
 
     }
 
+    //Used to save data.yml after a change is made
     fun saveDataFile(){
         try {
             data.save(dataFile)
@@ -45,8 +47,10 @@ object BriefcaseStorage {
         }
     }
 
-    fun reloadDataFile(){
-        data = YamlConfiguration.loadConfiguration(dataFile)
+    //Used to add information to data.yml
+    fun addDataToFile(path: String, value: Any){
+        data.set(path, value)
+        saveDataFile()
     }
 
 }

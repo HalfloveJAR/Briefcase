@@ -1,12 +1,12 @@
 package us.halflove.briefcase.gui
 
-import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
-import java.util.*
+import org.bukkit.inventory.ItemStack
+import us.halflove.briefcase.storage.BriefcaseStorage
+import us.halflove.briefcase.storage.SaveContents
 
 /*
 *
@@ -19,14 +19,10 @@ import java.util.*
 
 class EditingEvent : Listener{
 
+    //Used to save new contents of hopper GUI
     @EventHandler
     fun inventoryEditEvent(event: InventoryCloseEvent){
-        var player: Player = event.player as Player
-        if(event.view.title == "Briefcase"){
-
-            //Save when closed
-
-        }
+        if(event.view.title == "Briefcase") SaveContents.sortAndSaveContents(event.inventory.contents)
     }
 
 }

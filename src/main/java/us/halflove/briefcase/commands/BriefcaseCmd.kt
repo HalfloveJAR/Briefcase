@@ -21,11 +21,13 @@ object BriefcaseCmd : CommandExecutor{
 
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
 
+        //If there are no arguments used
         if(args.isEmpty()){
             CmdHelpFunction.helpCommand(sender)
             return true
         }
 
+        //Switch/when statement that checks for specific arguments
         when (args[0]) {
             "newcode" -> {
                 CodeGenerator.generateCode()

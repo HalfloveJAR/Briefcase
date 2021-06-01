@@ -14,6 +14,7 @@ import org.bukkit.command.CommandSender
 
 object CmdHelpFunction {
 
+    //Called when the /briefcase command is used incorrectly or the help argument is used
     fun helpCommand(sender: CommandSender){
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ""))
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&lBriefcase"))
