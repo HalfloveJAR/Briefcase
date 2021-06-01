@@ -1,11 +1,12 @@
 package us.halflove.briefcase.gui
 
 import org.bukkit.Bukkit
+import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.ItemStack
 import us.halflove.briefcase.storage.BriefcaseStorage
+import us.halflove.briefcase.storage.GetContents
 
 
 /*
@@ -20,14 +21,20 @@ import us.halflove.briefcase.storage.BriefcaseStorage
 object Hopper {
 
     //Opens hopper GUI
-    fun openHopper(player: Player) {
-        var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
-        player.openInventory(gui)
-    }
+    fun openHopper(player: Player) = player.openInventory(getHopper())
 
-    fun editHopper(player: Player){
+    //Creates hopper GUI from data.yml
+    fun getHopper(): Inventory{
         var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
-        player.openInventory(gui)
+
+        val contentsSection: ConfigurationSection? = BriefcaseStorage.data.getConfigurationSection("contents")
+        if (contentsSection != null) {
+            for (key in contentsSection.getKeys(false)) {
+                gui.setItem(key.toInt(), GetContents.getBriefcaseItemStack(key.toInt()))
+            }
+        }
+
+        return gui
     }
 
 }

@@ -1,5 +1,6 @@
 package us.halflove.briefcase.gui
 
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -23,6 +24,8 @@ class EditingEvent : Listener{
     @EventHandler
     fun inventoryEditEvent(event: InventoryCloseEvent){
         if(event.view.title == "Briefcase") SaveContents.sortAndSaveContents(event.inventory.contents)
+        //debug
+        Bukkit.getServer().logger.info(""+event.inventory.contents)
     }
 
 }

@@ -48,7 +48,7 @@ object BriefcaseStorage {
     }
 
     //Used to add information to data.yml
-    fun addDataToFile(path: String, value: Any){
+    fun addDataToFile(path: String, value: Any?){
         data.set(path, value)
         saveDataFile()
     }
