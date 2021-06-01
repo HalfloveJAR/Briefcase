@@ -1,0 +1,12 @@
+name: Briefcase
+version: ${project.version}
+main: us.halflove.briefcase.Main
+api-version: 1.16
+softdepend: [ ProtocolLib ]
+authors: [ Halflove ]
+description: A Roleplay commission plugin by Halflove for KnightCobra
+
+commands:
+  briefcase:
+    aliases: [bcase]
+    usage: /Briefcase <arguments>

@@ -1,0 +1,39 @@
+package us.halflove.briefcase.commands
+
+import org.bukkit.ChatColor
+import org.bukkit.command.Command
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
+import us.halflove.briefcase.math.CodeGenerator
+
+/*
+*
+* @author Halflove
+*
+* https://Halflove.us
+* https://github.com/HalfloveJAR
+*
+*/
+
+object BriefcaseCmd : CommandExecutor{
+
+    override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
+
+        if(args.isEmpty()){
+            CmdHelpFunction.helpCommand(sender)
+            return true
+        }
+
+        when (args[0]) {
+            "newcode" -> sender.sendMessage(CodeGenerator.generateCode().toString())
+            "modify" -> print("x == 2") //
+            "help" -> CmdHelpFunction.helpCommand(sender)
+            else -> {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown argument, try /briefcase help"))
+            }
+        }
+
+        return true
+    }
+
+}
