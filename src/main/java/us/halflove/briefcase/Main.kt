@@ -1,8 +1,10 @@
 package us.halflove.briefcase
 
 import org.bukkit.Bukkit
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import us.halflove.briefcase.commands.BriefcaseCmd
+import us.halflove.briefcase.gui.EditingEvent
 
 /*
 *
@@ -23,6 +25,7 @@ class Main : JavaPlugin() {
         }else logger.info("Briefcase v" + description.version + " enabled successfully.")
 
         getCommand("briefcase")?.setExecutor(BriefcaseCmd)
+        Bukkit.getPluginManager().registerEvents(EditingEvent, this)
 
     }
 
