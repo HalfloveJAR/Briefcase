@@ -19,13 +19,12 @@ import us.halflove.briefcase.passcode.InputCode
 
 class BriefcaseClick : Listener {
 
+    //Called when a player right clicks with the briefcase item, begins code input event
     @EventHandler
     fun clickBriefcase(event: PlayerInteractEvent) {
-
         if ((event.action == Action.RIGHT_CLICK_AIR || event.action == Action.RIGHT_CLICK_BLOCK)
             && (event.item == (BriefcaseItem.briefcaseLockedItemStack()) || event.item == (BriefcaseItem.briefcaseUnlockedItemStack())))
             InputCode.startInputCode(event.player)
-
     }
 
 }

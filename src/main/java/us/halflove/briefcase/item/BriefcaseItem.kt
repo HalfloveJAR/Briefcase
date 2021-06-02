@@ -19,6 +19,7 @@ import us.halflove.briefcase.storage.GetCode
 
 object BriefcaseItem {
 
+    //Function to give a specified player a specific type of briefcase
     fun getBriefcaseItem(player: Player, locked: Boolean){
         if(locked) {
             player.inventory.addItem(briefcaseLockedItemStack())
@@ -27,6 +28,7 @@ object BriefcaseItem {
         }
     }
 
+    //Returns with the locked briefcase item stack
     fun briefcaseLockedItemStack(): ItemStack{
         var briefcase: ItemStack = ItemStack(Material.CHEST_MINECART, 1)
         var briefcaseMeta: ItemMeta? = briefcase.itemMeta
@@ -41,6 +43,7 @@ object BriefcaseItem {
         return briefcase
     }
 
+    //Returns with the unlocked/revealed briefcase item stack
     fun briefcaseUnlockedItemStack(): ItemStack{
         var briefcase: ItemStack = ItemStack(Material.CHEST_MINECART, 1)
         var briefcaseMeta: ItemMeta? = briefcase.itemMeta

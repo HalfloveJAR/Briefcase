@@ -24,21 +24,27 @@ import org.bukkit.inventory.ItemStack
 
 class BriefcaseCombust : Listener {
 
+    //Called when the briefcase is burning, returns a "revealed code/unlocked" briefcase to the player who threw it into fire
     @EventHandler
     fun itemBurn(event: EntityCombustEvent){
         if(event.entityType == EntityType.DROPPED_ITEM) {
-            var locationBlock: Block = event.entity.location.block
+
+            //Casts the dropped item entity into an item
             var droppedItem: Item = event.entity as Item
-            var droppedItemStack = ItemStack(Material.valueOf(droppedItem.itemStack.type.toString()), 1)
-            Bukkit.broadcastMessage("" + droppedItem.thrower)
+
+            //Tests if the dropped item type is the same as the briefcase item type
             if(droppedItem.itemStack.type == BriefcaseItem.briefcaseLockedItemStack().type){
+
+                //Gives the new item to the player who threw the briefcase into fire
                 for(player in Bukkit.getServer().onlinePlayers){
                     if(player.uniqueId == droppedItem.thrower){
                         BriefcaseItem.getBriefcaseItem(player, false)
                         player.location.world!!.playSound(player.location, Sound.ENTITY_ITEM_PICKUP, 1f, 1f)
                     }
                 }
+
             }
+
         }
     }
 

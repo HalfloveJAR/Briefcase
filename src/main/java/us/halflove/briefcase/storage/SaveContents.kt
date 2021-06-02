@@ -1,7 +1,9 @@
 package us.halflove.briefcase.storage
 
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.BookMeta
 
 /*
 *
@@ -21,7 +23,14 @@ object SaveContents {
 
                 //Written book specific values to store
                 if (contents[slot].type == Material.WRITTEN_BOOK) {
+                    BriefcaseStorage.addDataToFile("contents.$slot.title", (contents[slot].itemMeta as BookMeta).title.toString())
+                    BriefcaseStorage.addDataToFile("contents.$slot.author", (contents[slot].itemMeta as BookMeta).author.toString())
 
+                    //Saves each page individually
+                    for(pageNum: Int in 1 until (contents[slot].itemMeta as BookMeta).pageCount +1){
+                        Bukkit.broadcastMessage("$pageNum" + (contents[slot].itemMeta as BookMeta).getPage(pageNum))
+                        BriefcaseStorage.addDataToFile("contents.$slot.pages.$pageNum", (contents[slot].itemMeta as BookMeta).getPage(pageNum))
+                    }
                 }
 
                 //Common values to store

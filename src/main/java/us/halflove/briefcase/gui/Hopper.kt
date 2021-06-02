@@ -36,7 +36,7 @@ object Hopper {
 
             //Iterates through the contents stored and sets them in their respective places when the GUI is opened
             for (key in contentsSection.getKeys(false)) {
-                gui.setItem(key.toInt(), GetContents.getBriefcaseItemStack(key.toInt()))
+                gui.setItem(key.toInt(), GetContents.getSlotItemStack(key.toInt()))
             }
 
         }
