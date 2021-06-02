@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack
 
 object GetContents {
 
+    //Builds and returns the requested item (slot) stored in the data.yml
     fun getBriefcaseItemStack(slot: Int): ItemStack{
 
         var selectedItem: ItemStack = ItemStack(

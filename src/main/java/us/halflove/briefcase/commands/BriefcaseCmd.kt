@@ -6,7 +6,9 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import us.halflove.briefcase.gui.Hopper
+import us.halflove.briefcase.item.BriefcaseItem
 import us.halflove.briefcase.math.CodeGenerator
+import us.halflove.briefcase.passcode.InputCode
 
 /*
 *
@@ -35,6 +37,8 @@ object BriefcaseCmd : CommandExecutor{
             }
             "modify" -> Hopper.openHopper(sender as Player)
             "help" -> CmdHelpFunction.helpCommand(sender)
+            "input" -> InputCode.startInputCode(sender as Player)
+            "get" -> BriefcaseItem.getBriefcaseItem(sender as Player)
             else -> {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown argument, try /briefcase help"))
             }

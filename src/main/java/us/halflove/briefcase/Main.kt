@@ -3,9 +3,11 @@ package us.halflove.briefcase
 import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
+import sun.plugin2.main.server.Plugin
 import us.halflove.briefcase.commands.BriefcaseCmd
 import us.halflove.briefcase.gui.EditingEvent
 import us.halflove.briefcase.math.CodeGenerator
+import us.halflove.briefcase.passcode.InputCode
 import us.halflove.briefcase.storage.BriefcaseStorage
 
 /*
@@ -21,15 +23,10 @@ class Main : JavaPlugin() {
 
     override fun onEnable(){
 
-        //Checks to see if you have ProtocolLib installed
-        if(!Bukkit.getServer().pluginManager.isPluginEnabled("ProtocolLib")){
-            logger.severe("Error loading Briefcase plugin; This plugin requires ProtocolLib to work!")
-            Bukkit.getServer().pluginManager.disablePlugin(this)
-        }else logger.info("Briefcase v" + description.version + " enabled successfully.")
-
         //Registers commands and events
         getCommand("briefcase")?.setExecutor(BriefcaseCmd)
         Bukkit.getPluginManager().registerEvents(EditingEvent(), this)
+        Bukkit.getPluginManager().registerEvents(InputCode, this)
 
         //Checks and creates data.yml
         BriefcaseStorage.createDataFile(this)

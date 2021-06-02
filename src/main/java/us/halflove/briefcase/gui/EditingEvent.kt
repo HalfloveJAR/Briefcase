@@ -20,12 +20,10 @@ import us.halflove.briefcase.storage.SaveContents
 
 class EditingEvent : Listener{
 
-    //Used to save new contents of hopper GUI
+    //Used to update the contents of the briefcase in the data.yml after the briefcase GUI is closed
     @EventHandler
     fun inventoryEditEvent(event: InventoryCloseEvent){
         if(event.view.title == "Briefcase") SaveContents.sortAndSaveContents(event.inventory.contents)
-        //debug
-        Bukkit.getServer().logger.info(""+event.inventory.contents)
     }
 
 }

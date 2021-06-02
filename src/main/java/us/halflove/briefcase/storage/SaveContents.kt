@@ -19,16 +19,22 @@ object SaveContents {
         for (slot in contents.indices) {
             if (contents[slot] != null) {
 
-                if(contents[slot].type == Material.WRITTEN_BOOK){
+                //Written book specific values to store
+                if (contents[slot].type == Material.WRITTEN_BOOK) {
 
-                }else {
-                    BriefcaseStorage.addDataToFile("contents.$slot.type", contents[slot].type.toString())
-                    BriefcaseStorage.addDataToFile("contents.$slot.amount", contents[slot].amount)
-                    BriefcaseStorage.addDataToFile("contents.$slot.enchants", contents[slot].itemMeta?.enchants.toString())
-                    BriefcaseStorage.addDataToFile("contents.$slot.name", contents[slot].itemMeta?.displayName.toString())
                 }
+
+                //Common values to store
+                BriefcaseStorage.addDataToFile("contents.$slot.type", contents[slot].type.toString())
+                BriefcaseStorage.addDataToFile("contents.$slot.amount", contents[slot].amount)
+                BriefcaseStorage.addDataToFile("contents.$slot.enchants", contents[slot].itemMeta?.enchants.toString())
+                BriefcaseStorage.addDataToFile("contents.$slot.name", contents[slot].itemMeta?.displayName.toString())
+
             }else{
+
+                //If an item is removed from the briefcase, this remove it from the data.yml
                 BriefcaseStorage.addDataToFile("contents.$slot", null)
+
             }
         }
     }

@@ -25,13 +25,20 @@ object Hopper {
 
     //Creates hopper GUI from data.yml
     fun getHopper(): Inventory{
+
+        //Creates the briefcase GUI
         var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
 
+        //Gets the configuration section "contents" in the data.yml (contents of the briefcase)
         val contentsSection: ConfigurationSection? = BriefcaseStorage.data.getConfigurationSection("contents")
+
         if (contentsSection != null) {
+
+            //Iterates through the contents stored and sets them in their respective places when the GUI is opened
             for (key in contentsSection.getKeys(false)) {
                 gui.setItem(key.toInt(), GetContents.getBriefcaseItemStack(key.toInt()))
             }
+
         }
 
         return gui
