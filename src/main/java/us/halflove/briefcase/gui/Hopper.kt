@@ -1,6 +1,7 @@
 package us.halflove.briefcase.gui
 
 import org.bukkit.Bukkit
+import org.bukkit.Sound
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType
@@ -21,13 +22,16 @@ import us.halflove.briefcase.storage.GetContents
 object Hopper {
 
     //Opens hopper GUI
-    fun openHopper(player: Player) = player.openInventory(getHopper())
+    fun openHopper(player: Player) {
+        player.openInventory(getHopper())
+        player.location.world!!.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 1f, 2f)
+    }
 
     //Creates hopper GUI from data.yml
-    fun getHopper(): Inventory{
+    private fun getHopper(): Inventory{
 
         //Creates the briefcase GUI
-        var gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase");
+        val gui: Inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "Briefcase")
 
         //Gets the configuration section "contents" in the data.yml (contents of the briefcase)
         val contentsSection: ConfigurationSection? = BriefcaseStorage.data.getConfigurationSection("contents")

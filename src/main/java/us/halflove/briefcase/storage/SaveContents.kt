@@ -28,7 +28,6 @@ object SaveContents {
 
                     //Saves each page individually
                     for(pageNum: Int in 1 until (contents[slot].itemMeta as BookMeta).pageCount +1){
-                        Bukkit.broadcastMessage("$pageNum" + (contents[slot].itemMeta as BookMeta).getPage(pageNum))
                         BriefcaseStorage.addDataToFile("contents.$slot.pages.$pageNum", (contents[slot].itemMeta as BookMeta).getPage(pageNum))
                     }
                 }

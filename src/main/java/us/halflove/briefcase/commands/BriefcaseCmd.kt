@@ -39,7 +39,6 @@ object BriefcaseCmd : CommandExecutor{
             "help" -> CmdHelpFunction.helpCommand(sender)
             "input" -> InputCode.startInputCode(sender as Player)
             "get" -> BriefcaseItem.getBriefcaseItem(sender as Player, true)
-            "book" -> (sender as Player).inventory.addItem(WrittenBooks.createBook())
             else -> {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown argument, try /briefcase help"))
             }

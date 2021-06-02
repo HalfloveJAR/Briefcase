@@ -25,7 +25,7 @@ object CmdHelpFunction {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e/BCase Modify"))
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Open/edit the contents of the briefcase"))
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e/BCase Get"))
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Get the briefcase"))
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Get a briefcase item"))
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ""))
     }
 

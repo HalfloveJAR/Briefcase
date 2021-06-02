@@ -1,13 +1,18 @@
 package us.halflove.briefcase.passcode
 
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerChatEvent
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.inventory.Inventory
 import us.halflove.briefcase.gui.Hopper
 import us.halflove.briefcase.storage.GetCode
+import us.halflove.briefcase.utils.HeadTextureFilter
 
 
 /*
@@ -21,35 +26,82 @@ import us.halflove.briefcase.storage.GetCode
 
 object InputCode : Listener {
 
-    var enteringCode: HashMap<Player, Boolean> = HashMap<Player, Boolean>()
+    var enteringCode: HashMap<Player, String> = HashMap<Player, String>()
 
     fun startInputCode(player: Player){
-
-        enteringCode[player] = true
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&lIt's locked!"))
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cEnter the passcode to open."))
+        player.openInventory(getCodeGui())
         player.location.world!!.playSound(player.location, Sound.BLOCK_ANVIL_USE, 1f, 2f)
-
     }
 
-    private fun inputCode(player: Player, input: String){
-        if(enteringCode.containsKey(player) && enteringCode[player] == true){
-            if(input.contains(GetCode.code())) Hopper.openHopper(player)
+    //Returns with the code input inventory/gui
+    private fun getCodeGui(): Inventory{
+
+        //Creates the code input GUI
+        val gui: Inventory = Bukkit.createInventory(null, 18, "Enter The Passcode")
+
+        //Sets the numbers in the input keyboard to their respective textures and slots
+        var number = 0
+        for(slot: Int in 2 until 7){
+            gui.setItem(slot, HeadTextureFilter.customHead(number))
+            number++
+        }
+        for(slot: Int in 11 until 16){
+            gui.setItem(slot, HeadTextureFilter.customHead(number))
+            number++
+        }
+
+        return gui
+    }
+
+    //Checks if a player clicked a number on the keypad and updates their passcode entry
+    @EventHandler
+    fun clickItem(event: InventoryClickEvent){
+        val player: Player = event.whoClicked as Player
+
+        if(event.view.title == "Enter The Passcode"){
+            if(event.currentItem?.type != Material.AIR) {
+                event.isCancelled = true
+                if(event.currentItem?.type == Material.PLAYER_HEAD) {
+                    event.currentItem!!.itemMeta?.let { codeEntryUpdate(player, it.displayName) }
+                }
+            }
         }
     }
 
-    private fun endInputCode(player: Player){
-        enteringCode.remove(player)
+    //Updates a player's passcode entry
+    private fun codeEntryUpdate(player: Player, input: String){
+
+        //Gets the player's current input
+        val currentInput = if(enteringCode.containsKey(player)){
+            enteringCode.getValue(player)
+        }else ""
+
+        //Updates the player's input
+        enteringCode[player] = currentInput+input
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eCurrent Input: " + enteringCode.getValue(player)))
+        player.location.world!!.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BIT, 1f, 0f)
+
+        //Checks for a passcode match, clears their passcode input entry if no match is found
+        if(enteringCode.getValue(player).length == GetCode.code().length){
+            if(enteringCode.getValue(player) == GetCode.code()){
+                enteringCode.remove(player)
+                Hopper.openHopper(player)
+            }else{
+                player.closeInventory()
+                player.location.world!!.playSound(player.location, Sound.BLOCK_ANVIL_LAND, 1f, 2f)
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cIncorrect code!"))
+            }
+        }
+
     }
 
+    //Remove player's passcode input when they close the code input gui
     @EventHandler
-    fun playerChat(event: PlayerChatEvent){
-        if(enteringCode.containsKey(event.player) && enteringCode[event.player] == true){
-            inputCode(event.player, event.message)
-            event.isCancelled = true
-            event.player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aCorrect!"))
-            event.player.location.world!!.playSound(event.player.location, Sound.BLOCK_CHEST_OPEN, 1f, 2f)
-            endInputCode(event.player)
+    fun closeMenu(event: InventoryCloseEvent){
+        if(event.view.title == "Enter The Passcode"){
+            if(enteringCode.containsKey(event.player)){
+                enteringCode.remove(event.player)
+            }
         }
     }
 
