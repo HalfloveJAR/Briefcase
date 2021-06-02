@@ -39,7 +39,7 @@ object BriefcaseStorage {
     }
 
     //Used to save data.yml after a change is made
-    fun saveDataFile(){
+    private fun saveDataFile(){
         try {
             data.save(dataFile)
         } catch (e: IOException) {
