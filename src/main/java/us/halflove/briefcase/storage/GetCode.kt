@@ -12,6 +12,7 @@ package us.halflove.briefcase.storage
 object GetCode {
 
     //Gets and returns the passcode from the data.yml
-    fun code(): String = BriefcaseStorage.data.get("code").toString()
+    val code: String
+        get() = BriefcaseStorage.data.get("code").toString()
 
 }

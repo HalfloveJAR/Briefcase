@@ -82,8 +82,8 @@ object InputCode : Listener {
         player.location.world!!.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BIT, 1f, 0f)
 
         //Checks for a passcode match, clears their passcode input entry if no match is found
-        if(enteringCode.getValue(player).length == GetCode.code().length){
-            if(enteringCode.getValue(player) == GetCode.code()){
+        if(enteringCode.getValue(player).length == GetCode.code.length){
+            if(enteringCode.getValue(player) == GetCode.code){
                 enteringCode.remove(player)
                 Hopper.openHopper(player)
             }else{

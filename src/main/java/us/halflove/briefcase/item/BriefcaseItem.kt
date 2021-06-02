@@ -50,7 +50,7 @@ object BriefcaseItem {
         var briefcaseLore: ArrayList<String> = ArrayList<String>()
         briefcaseLore.add("")
         briefcaseLore.add(ChatColor.translateAlternateColorCodes('&', "&7Written on the side it reads:"))
-        briefcaseLore.add(ChatColor.translateAlternateColorCodes('&', "&7&o${GetCode.code()}"))
+        briefcaseLore.add(ChatColor.translateAlternateColorCodes('&', "&7&o${GetCode.code}"))
         briefcaseLore.add("")
         briefcaseMeta?.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&fBriefcase"))
         briefcaseMeta?.lore = briefcaseLore
