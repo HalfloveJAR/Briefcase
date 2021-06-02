@@ -38,7 +38,7 @@ object BriefcaseCmd : CommandExecutor{
             "modify" -> Hopper.openHopper(sender as Player)
             "help" -> CmdHelpFunction.helpCommand(sender)
             "input" -> InputCode.startInputCode(sender as Player)
-            "get" -> BriefcaseItem.getBriefcaseItem(sender as Player)
+            "get" -> BriefcaseItem.getBriefcaseItem(sender as Player, true)
             else -> {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown argument, try /briefcase help"))
             }
