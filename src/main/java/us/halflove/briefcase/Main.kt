@@ -6,6 +6,7 @@ import us.halflove.briefcase.commands.BriefcaseCmd
 import us.halflove.briefcase.gui.EditingEvent
 import us.halflove.briefcase.item.BriefcaseClick
 import us.halflove.briefcase.item.BriefcaseCombust
+import us.halflove.briefcase.item.ThrowItemEvent
 import us.halflove.briefcase.math.CodeGenerator
 import us.halflove.briefcase.passcode.InputCode
 import us.halflove.briefcase.storage.BriefcaseStorage
@@ -28,6 +29,7 @@ class Main : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(EditingEvent(), this)
         Bukkit.getPluginManager().registerEvents(BriefcaseClick(), this)
         Bukkit.getPluginManager().registerEvents(BriefcaseCombust(), this)
+        Bukkit.getPluginManager().registerEvents(ThrowItemEvent, this)
         Bukkit.getPluginManager().registerEvents(InputCode, this)
 
         //Checks and creates data.yml

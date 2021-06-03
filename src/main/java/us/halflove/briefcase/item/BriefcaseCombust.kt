@@ -37,9 +37,12 @@ class BriefcaseCombust : Listener {
 
                 //Gives the new item to the player who threw the briefcase into fire
                 for(player in Bukkit.getServer().onlinePlayers){
-                    if(player.uniqueId == droppedItem.thrower){
-                        BriefcaseItem.getBriefcaseItem(player, false)
-                        player.location.world!!.playSound(player.location, Sound.ENTITY_ITEM_PICKUP, 1f, 1f)
+                    if(ThrowItemEvent.droppedItem.containsKey(player)) {
+                        if (ThrowItemEvent.droppedItem[player]?.type == droppedItem.itemStack.type) {
+                            BriefcaseItem.getBriefcaseItem(player, false)
+                            player.location.world!!.playSound(player.location, Sound.ENTITY_ITEM_PICKUP, 1f, 1f)
+                            ThrowItemEvent.droppedItem.remove(player)
+                        }
                     }
                 }
 

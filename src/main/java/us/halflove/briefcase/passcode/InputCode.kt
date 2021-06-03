@@ -35,7 +35,6 @@ object InputCode : Listener {
 
     //Returns with the code input inventory/gui
     private fun getCodeGui(): Inventory{
-
         //Creates the code input GUI
         val gui: Inventory = Bukkit.createInventory(null, 18, "Enter The Passcode")
 
@@ -70,7 +69,6 @@ object InputCode : Listener {
 
     //Updates a player's passcode entry
     private fun codeEntryUpdate(player: Player, input: String){
-
         //Gets the player's current input
         val currentInput = if(enteringCode.containsKey(player)){
             enteringCode.getValue(player)
@@ -92,7 +90,6 @@ object InputCode : Listener {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cIncorrect code!"))
             }
         }
-
     }
 
     //Remove player's passcode input when they close the code input gui
